@@ -17,6 +17,10 @@ const serviceSchema = new Schema({
     type: Number,
     required: true,
   },
+  image: {
+    type: String,
+    required: true,
+  },
   phone_number: {
     type: String,
     validate: {
