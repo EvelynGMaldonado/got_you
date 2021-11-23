@@ -26,6 +26,10 @@ const serviceSchema = new Schema({
       message: props => `${props.value} is not a valid phone number!`
     },
     required: [true, 'User phone number required']
+  },
+  User: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
   }
 });
 

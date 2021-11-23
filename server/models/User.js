@@ -1,4 +1,8 @@
 const { Schema, model } = require('mongoose');
+const validateEmail = (email)=> {
+    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(email)
+};
 
 const userSchema = new Schema({
   first_name: {
@@ -26,7 +30,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
     match: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
-  }
+  }, 
+  servicePost: [{
+    type: Schema.Types.ObjectId,
+    ref: "ServicePost"
+  }]
 });
 
 const User = model('User', userSchema);
