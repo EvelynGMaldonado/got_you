@@ -10,11 +10,11 @@ const serviceSchema = new Schema({
     required: true,
   },
   location: {
-    type: Number,
+    type: String,
     required: true,
   },
   hourly_rate: {
-    type: Number,
+    type: String,
     required: true,
   },
   image: {
@@ -31,7 +31,7 @@ const serviceSchema = new Schema({
     },
     required: [true, 'User phone number required']
   },
-  User: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: "User"
   }
