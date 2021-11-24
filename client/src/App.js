@@ -19,7 +19,10 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="flex-column justify-center align-center min-100-vh bg-primary">
+        <div>
+        <header>
+          <img/>
+        </header>
           <Switch>
             <Route exact path="/signup">
               <SignUp/>
@@ -46,6 +49,9 @@ function App() {
               <NotFound />
             </Route>
           </Switch>
+          <footer>
+            <p>license</p>
+          </footer>
         </div>
       </Router>
     </ApolloProvider>
