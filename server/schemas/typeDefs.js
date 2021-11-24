@@ -13,8 +13,8 @@ const typeDefs = gql`
   type ServicePost {
     name: String
     description: String
-    location: Number
-    hourly_rate: Number
+    location: String
+    hourly_rate: String
     phone_number: String
     user:User
   }
@@ -25,22 +25,31 @@ const typeDefs = gql`
 
   type Query {
     me: User
+    findServicePost(location:String):ServicePost
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
-    addUser(first_name: String, last_name: String, username: String!, email: String!, password: String!): Auth
-    savedServicePost(input: savedServicePost!): User
+    addUser(input: savedUser!): Auth
+    addServicePost(input: savedServicePost!): ServicePost
+    savedServicePost(_id: ID!): User
     removeServicePost(_id: ID!): User
   }
   input savedServicePost {
     name: String
     description: String
-    location:Number
-    hourly_rate: Number
+    location:String
+    hourly_rate: String
     phone_number: String
     image: String
-    user: User
+    user: String
+  }
+  input savedUser {
+    first_name: String
+    last_name: String
+    username: String!
+    email: String!
+    password: String!
   }
 `;
 
