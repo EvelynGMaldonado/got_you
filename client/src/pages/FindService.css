@@ -1,0 +1,11 @@
+.base-grid {
+    display: grid;
+    column-gap: 10px;
+    row-gap: 25px;
+}
+.fit {
+    display: flex;
+}
+.distribute-even {
+    justify-content: space-evenly;
+}

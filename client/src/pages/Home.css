@@ -1,0 +1,31 @@
+
+.base-grid {
+    display: grid;
+    column-gap: 10px;
+    row-gap: 25px;
+}
+.home-columns {
+    grid-template-columns: repeat(6, 1fr);
+}
+.full-width {
+    grid-column-start: span 6;
+}
+.center {
+    justify-self: center;
+}
+.login {
+    grid-column-start: span 3;
+}
+.intro {
+    grid-column-start: span 3;
+}
+.fit {
+    display: flex;
+}
+.align-center {
+    align-items: center;
+}
+.stack {
+    flex-direction: column;
+    padding: 10px 50px 10px 50px;
+}
