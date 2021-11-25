@@ -9,3 +9,32 @@
 .distribute-even {
     justify-content: space-evenly;
 }
+.home-columns {
+    grid-template-columns: repeat(6, 1fr);
+}
+.full-width {
+    grid-column-start: span 6;
+}
+.nav-columns {
+    grid-template-columns: repeat(5, 1fr);
+    border: 10px solid var(--green);
+    border-width: thick;
+    padding: 0.5%;
+    background-color: var(--green);
+    border-radius: 10px;
+    margin: 3% 15% 0% 15%;
+}
+.btn {
+    background-color: var(--green);
+    color: var(--white);
+    padding: 0.5%;
+    font-weight: bolder;
+    font-size: 1.25 rem;
+}
+.center {
+    justify-self: center;
+}
+h3 {
+    color: purple;
+    margin-top: 0%;
+}

@@ -1,4 +1,16 @@
-
+:root{
+    --blue: rgb(6, 93, 122);
+    --white: white;
+    --green: rgb(137, 199, 22);
+    --purple: purple;
+    --gray: lightgray;
+}
+body{
+    text-align: center;
+}
+h3 {
+    display: center;
+}
 .base-grid {
     display: grid;
     column-gap: 10px;
@@ -15,9 +27,17 @@
 }
 .login {
     grid-column-start: span 3;
+    margin-top: 3%;
+    
 }
 .intro {
     grid-column-start: span 3;
+    border: 10px solid var(--green);
+    border-style: dotted;
+    border-width: thick;
+    background-color: white;
+    margin: 3% 18% 1% 0%;
+    padding: 3% 2% 4.5% 2%;
 }
 .fit {
     display: flex;
@@ -28,4 +48,109 @@
 .stack {
     flex-direction: column;
     padding: 10px 50px 10px 50px;
+}
+.nav-columns {
+    grid-template-columns: repeat(5, 1fr);
+    border: 10px solid var(--green);
+    border-width: thick;
+    padding: 0.5%;
+    background-color: var(--green);
+    border-radius: 10px;
+    margin: 0% 15% 0% 15%;
+}
+.distribute-even {
+    justify-content: space-evenly;
+}
+.mission {
+    box-shadow: 0px 0px 12.5px 5px var(--gray);
+    /* justify-self: center; */
+    background-color: white;
+    margin: 3% 15% 3% 15%;
+    border-radius: 10px; 
+}
+.miss {
+    padding: 3%;
+}
+.btn {
+    background-color: var(--green);
+    color: var(--white);
+    padding: 0.5%;
+    font-weight: bolder;
+    font-size: 1.25 rem;
+}
+/* button:hover {
+    box-shadow: -5px -5px 15px 15px #b91a64;
+} */
+.signin {
+    border: 10px solid var(--green);
+    border-style: dotted;
+    border-width: thick;
+    /* justify-self: center; */
+    background-color: white;
+    margin: 3% 20% 1% 20%;
+    padding: 3% 2% 4.5% 2%;
+}
+.log {
+    margin-bottom: 5%;
+    color:var(--purple)
+}
+.works {
+    color:var(--purple);
+}
+label {
+    text-align: left;
+    font-weight: bolder;
+}
+
+.empw {
+    display: grid;
+    column-gap: 10px;
+    border: 10px solid var(--gray);
+    border-width: thick;
+    background-color:var(--gray);
+    margin: 2% 2% 4% 2%;
+    padding: 2% 2% 6% 2%;
+}
+.btnlog {
+    background-color: var(--green);
+    color: black;
+    border: none;
+    padding: 2%;
+    font-weight: bolder;
+    font-size: 1.25 rem;
+    max-width: 35%;
+    justify-content: center;
+    margin-left: 32.5%;
+    border-radius: 10px;
+}
+
+.btnsign {
+    background-color: var(--purple);
+    color:var(--white);
+    border: none;
+    padding: 2%;
+    font-weight: bolder;
+    font-size: 1.25 rem;
+    width: 60%;
+    /* justify-content: center; */
+    margin: 3%;
+    border-radius: 10px;
+}
+.countour {
+    border: 10px solid var(--purple);
+    border-style: dotted;
+    border-width: thick;
+}
+
+.btnmore {
+    background-color: rgb(35, 12, 240);
+    color: white;
+    border: none;
+    padding: 2%;
+    font-weight: bolder;
+    font-size: 0.75rem;
+    max-width: 35%;
+    justify-content: center;
+    border-radius: 10px;
+    margin-bottom: 0%;
 }

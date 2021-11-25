@@ -9,6 +9,7 @@ import ServicePost from './pages/ServicePost';
 import OfferService from './pages/OfferService';
 import FindService from './pages/FindService';
 import NotFound from './pages/NotFound';
+import "./App.css";
 
 const client = new ApolloClient({
   uri: '/graphql',
@@ -21,7 +22,10 @@ function App() {
       <Router>
         <div>
         <header>
-          <img/>
+          <h1 className="center">
+            <img src={require("./assets/gotchu-logo.png").default} alt="pp" style={{maxWidth:"10%"}}/>
+            IGotcha!
+          </h1>
         </header>
           <Switch>
             <Route exact path="/signup">
@@ -49,7 +53,7 @@ function App() {
               <NotFound />
             </Route>
           </Switch>
-          <footer>
+          <footer className="full-width home-columns">
             <p>license</p>
           </footer>
         </div>
