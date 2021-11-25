@@ -1,7 +1,10 @@
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_MATCHUPS } from '../utils/queries';
+// import Auth from '../utils/auth';
 import "./Home.css";
+
 
 const Home = () => {
   // const { loading, data } = useQuery(QUERY_MATCHUPS, {
@@ -9,6 +12,33 @@ const Home = () => {
   // });
 
   // const matchupList = data?.matchups || [];
+
+  //update state besed on input changes
+  // const handleChange = (event) =>{
+  //   const {name, value} = event.target;
+
+  //   setFormState({
+  //     ...formState,
+  //     [name]: value,
+  //     });
+  // }
+
+
+  // //submit form
+  // const handleformSubmit = async (event) =>{
+  //   event.preventDefault();
+  //   console.log(formState);
+
+  //   try{
+  //     const {data} = await addUser({
+  //       variables: {...formState},
+  //     });
+  //     Auth.login(data.addUser.token)
+  //   }
+  //   catch (err) {
+  //     console.log(err)
+  //   }
+  // }
 
   return (
     <main className="base-grid home-columns">
@@ -46,6 +76,7 @@ const Home = () => {
         <button>Language</button>
       </section>
     </main>
+
   );
 };
 

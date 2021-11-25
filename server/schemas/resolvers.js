@@ -26,10 +26,10 @@ const resolvers = {
   },
   Mutation: {
     //creates a single user an a jwt token for that user
-    addUser: async (parent, args) => {
+    addUser: async (parent, {userData}) => {
       try {
         //create a new user first
-        const user = await User.create(args);
+        const user = await User.create(userData);
         //sign a JSON web token and log in the user after it is created
         const token = signToken(user);
         //we need to return an 'auth' object that contains the signed token and user's info
@@ -38,10 +38,10 @@ const resolvers = {
         console.log(err);
       }
     },
-    addServicePost: async (parent, args) => {
+    addServicePost: async (parent, {servicePostData}) => {
       try {
         //create a new user first
-        const post = await ServicePost.create(args);
+        const post = await ServicePost.create(servicePostData);
         return post;
       } catch (err) {
         console.log(err);
