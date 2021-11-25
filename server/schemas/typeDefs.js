@@ -28,14 +28,16 @@ const typeDefs = gql`
     findServicePost(location:String):ServicePost
   }
 
+
+
   type Mutation {
     login(email: String!, password: String!): Auth
-    addUser(input: savedUser!): Auth
-    addServicePost(input: savedServicePost!): ServicePost
+    addUser(userData: UserInput!): Auth
+    addServicePost(servicePostData: ServicePostInput!): ServicePost
     savedServicePost(_id: ID!): User
     removeServicePost(_id: ID!): User
   }
-  input savedServicePost {
+  input ServicePostInput {
     name: String
     description: String
     location:String
@@ -44,9 +46,9 @@ const typeDefs = gql`
     image: String
     user: String
   }
-  input savedUser {
-    first_name: String
-    last_name: String
+  input UserInput {
+    first_name: String!
+    last_name: String!
     username: String!
     email: String!
     password: String!
