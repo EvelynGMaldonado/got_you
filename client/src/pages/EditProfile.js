@@ -24,14 +24,16 @@ const EditProfile = () =>{
                         <input placeholder="change pasword"/>
                         <label>Confirm Password</label>
                         <input placeholder="confirm pasword"/>
+                        <label>Biography</label>
+                        <input placeholder="about me"/>
                         <label>Update Profile Picture</label>
                         <input className="profpic" placeholder="upload profile picture"/>
                     </div>
                         <div className="full-width distribute-even fit">
-                        <button className="add fit">Add photo</button>
-                        <button className="save fit">Save Changes</button>
-                        <button className="cancel fit">Cancel</button>
-                    </div>
+                            <button className="add fit">Add photo</button>
+                            <button className="save fit">Save Changes</button>
+                            <button className="cancel fit">Cancel</button>
+                        </div>
                 </form>
             </section>
         </main>
