@@ -13,16 +13,39 @@ const FindService = () =>{
             <div className="full-width">
                 <h3 className="center">Find a service</h3>
             </div>
-            <form className="fit">
-                <select>
+            <form className="fit options full-width">
+                <select className="select">
                     <option>Tutor-math</option>
                     <option>Tutor-math</option>
                     <option>Tutor-math</option>
                     <option>Tutor-math</option>
                 </select>
-                <input placeholder="zipcode"/>
-                <button>go!</button>
+                <input className="zipcode" placeholder="zipcode"/>
+                <button className="go">go!</button>
             </form>
+            <section className="fit full-width results center">
+                <h5 className="center">RESULTS</h5>
+                <div className="find">
+                    <image/>
+                    <form>
+                        <h6>Service name:</h6>
+                        <p>Provider's name:</p>
+                        <p>Location:</p>
+                        <p>Hourly rate:</p>
+                    </form>
+                    <button className="btn-more">more...</button>
+                </div>
+                <div className="find">
+                    <image/>
+                    <form>
+                        <h6>Service name:</h6>
+                        <p>Provider's name:</p>
+                        <p>Location:</p>
+                        <p>Hourly rate:</p>
+                    </form>
+                    <button className="btn-more">more...</button>
+                </div>
+            </section>
 
         </main>
     );
