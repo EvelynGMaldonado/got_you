@@ -23,30 +23,21 @@ const FindService = () =>{
                 <input className="zipcode" placeholder="zipcode"/>
                 <button className="go">go!</button>
             </form>
-            <section className="fit full-width results center">
-                <h5 className="center">RESULTS</h5>
-                <div className="find">
-                    <image/>
-                    <form>
-                        <h6>Service name:</h6>
-                        <p>Provider's name:</p>
-                        <p>Location:</p>
-                        <p>Hourly rate:</p>
-                    </form>
-                    <button className="btn-more">more...</button>
-                </div>
-                <div className="find">
-                    <image/>
-                    <form>
-                        <h6>Service name:</h6>
-                        <p>Provider's name:</p>
-                        <p>Location:</p>
-                        <p>Hourly rate:</p>
-                    </form>
-                    <button className="btn-more">more...</button>
-                </div>
+            <section className="edit full-width">
+                <form className="editprof fit stack" style={{margin:"auto", maxWidth:"70%"}}>
+                    <h4 className="ed">RESULTS</h4>
+                    <div className="find">
+                        <img/>
+                        <form>
+                            <h6>Service name:</h6>
+                            <p>Provider's name:</p>
+                            <p>Location:</p>
+                            <p>Hourly rate:</p>
+                        </form>
+                        <button className="btn-more">More...</button>
+                    </div>
+                </form>
             </section>
-
         </main>
     );
 }
