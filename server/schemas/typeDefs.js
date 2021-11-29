@@ -11,6 +11,7 @@ const typeDefs = gql`
     servicePost: [ServicePost]
   }
   type ServicePost {
+    _id: String
     name: String
     description: String
     location: String
@@ -25,7 +26,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
-    findServicePost(location:String):ServicePost
+    findServicePost(location:String):[ServicePost]
   }
 
 

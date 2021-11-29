@@ -1,17 +1,107 @@
 import React, {useState} from 'react';
+import Auth from '../utils/auth';
+import { useMutation } from '@apollo/react-hooks';
+import {LOGIN_USER} from '../utils/mutations';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { QUERY_MATCHUPS } from '../utils/queries';
-// import Auth from '../utils/auth';
+import { QUERY_ME } from '../utils/queries';
 import "./Home.css";
 
+// const LoginForm = () => {
+//   const [userFormData, setUserFormData] = useState({
+//     first_name: "",
+//     last_name: "",
+//     username: "",
+//     email: "",
+//     password: ""
+//   });
+//   const [validated] = useState(false);
+//   // const [showAlert, setShowAlert] = useState(false);
+//   const [loginUser] = useMutation(LOGIN_USER);
 
+//   const handleInputChange = (event) => {
+//     const { name, value } = event.target;
+//     setUserFormData({
+//       ...setUserFormData, [name]: value
+//     });
+//   };
+//   const handleFormSubmit = async (event) => {
+//     event.preventDefault();
+//     const form = event.currentTarget; 
+//     if (form.checkValidity() === false) {
+//       event.preventDefault();
+//       event.setPropahation();
+//     }
+//     try {
+//       const { data } = await loginUser ({
+//         variables: {
+//           ...userFormData
+//         },
+//       });
+//       Auth.login(data.login.token);
+//     } catch(err) {
+//       console.log(err);
+//       // setShowAlert(true);
+//     }
+//     setUserFormData({
+//       first_name: "",
+//       last_name: "",
+//       username: "",
+//       email: "",
+//       password: ""
+//     });
+//   };
+  
+// };
 const Home = () => {
-  // const { loading, data } = useQuery(QUERY_MATCHUPS, {
-  //   fetchPolicy: "no-cache"
-  // });
+  const { loading, data } = useQuery(QUERY_ME, {
+    fetchPolicy: "no-cache"
+  });
 
-  // const matchupList = data?.matchups || [];
+  const User = data?.User || [];
+  const [userFormData, setUserFormData] = useState({
+    first_name: "",
+    last_name: "",
+    username: "",
+    email: "",
+    password: ""
+  });
+  const [validated] = useState(false);
+  // const [showAlert, setShowAlert] = useState(false);
+  const [loginUser] = useMutation(LOGIN_USER);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({
+      ...setUserFormData, [name]: value
+    });
+  };
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget; 
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.setPropahation();
+    }
+    try {
+      const { data } = await loginUser ({
+        variables: {
+          ...userFormData
+        },
+      });
+      Auth.login(data.login.token);
+    } catch(err) {
+      console.log(err);
+      // setShowAlert(true);
+    }
+    setUserFormData({
+      first_name: "",
+      last_name: "",
+      username: "",
+      email: "",
+      password: ""
+    });
+  };
 
   //update state besed on input changes
   // const handleChange = (event) =>{
@@ -41,22 +131,31 @@ const Home = () => {
   // }
 
   return (
-    <main className="base-grid home-columns">
-      <div className="mission full-width fit">
+    <main className="home base-grid home-columns" >
+      <div className="mission full-width">
         <h5 className="miss">Mission statement</h5>
+        <p>IGotcha app finds qualified individual in your area or across the world to bring you the services that you need.
+          "We as humans, will always have a need to seek help from others, conversely, we also have skills to share and help those around us".
+          </p>
         <div className="center">
-        <img src={require("../assets/fb.png").default} alt="pp"/>
-        <img src={require("../assets/instagram.png").default} alt="pp"/>
-        <img src={require("../assets/pinterest.png").default} alt="pp"/>
-        <img src={require("../assets/twitter.png").default} alt="pp"/>
+        <img src={require("../assets/fb.png").default} style={{width:"30px"}} alt="pp"/>
+        <img src={require("../assets/instagram.png").default} style={{width:"30px"}} alt="pp"/>
+        <img src={require("../assets/pinterest.png").default} style={{width:"30px"}} alt="pp"/>
+        <img src={require("../assets/twitter.png").default} style={{width:"30px"}} alt="pp"/>
         </div>
       </div>
       <nav className="full-width nav-columns distribute-even fit">
-        <button className="btn">Profile</button>
+        <Link to="/profile">
+          <button className="btn">Profile</button>
+        </Link>
+        <Link to="/find-service">
         <button className="btn">Find Service</button>
+        </Link>
+        <Link to="/offer-service">
         <button className="btn">Offer Service</button>
+        </Link>
         <button className="btn">Language</button>
-        <button className="btn">Logout</button>
+        <button onClick={Auth.logout}className="btn">Logout</button>
       </nav>
       <div className="images full-width distribute-even fit">
         <img src={require("../assets/babysitter.jpg").default} style={{maxWidth:"10%"}} alt="pp"/>
@@ -67,18 +166,41 @@ const Home = () => {
         <img src={require("../assets/photographer.jpg").default} style={{maxWidth:"10%"}} alt="pp"/>
         <img src={require("../assets/remote.png").default} style={{maxWidth:"10%"}} alt="pp"/>
         <img src={require("../assets/tutoring.jpg").default} style={{maxWidth:"10%"}} alt="pp"/>
-      </div>
+      </div >
       <section className="login">
-        <form className=" signin fit stack" style={{margin:"auto", maxWidth:"65%"}}>
-          <h4 className="log">Login</h4>
-          <div className="empw">
-            <label>Email</label>
-            <input placeholder="email"/>
-            <label> Password</label>
-            <input placeholder="pasword"/>
-          </div>
-          <button className="btnlog">Login</button>
-        </form>
+          <form className=" signin fit stack" style={{margin:"auto", maxWidth:"65%"}}>
+            <h4 className="log">Login</h4>
+            <div className="empw full-width">
+              <label>Email</label>
+              <input 
+                style={{maxWidth:"100%"}}
+                type="text" 
+                placeholder="email"
+                name ="email"
+                onChange = {handleInputChange}
+                value = {userFormData.email}
+                required 
+              />
+              <label> Password</label>
+              <input 
+                style={{maxWidth:"100%"}} 
+                type= "password"
+                placeholder="pasword"
+                name= "password"
+                onChange = {handleInputChange}
+                value = {userFormData.password}
+                required
+              />
+            </div>
+            <button 
+              className="btnlog"
+              disabled = {!(userFormData.email && userFormData.password)}
+              type = "submit"
+              onClick={handleFormSubmit}
+              variant = "success">
+              Login
+            </button>
+          </form>
         <button className="btnsign full-width">Sign up</button>
       </section>
       <section className="intro">
