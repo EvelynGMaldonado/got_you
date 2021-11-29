@@ -38,11 +38,17 @@ const resolvers = {
         console.log(err);
       }
     },
-    addServicePost: async (parent, {servicePostData}) => {
+    addServicePost: async (parent, {servicePostData}, context) => {
       try {
-        //create a new user first
-        const post = await ServicePost.create(servicePostData);
-        return post;
+        if (context.user) {
+          let post = await ServicePost.create({
+            ...servicePostData,
+            user:context.user._id
+          });
+          post = await post.populate("user").execPopulate();
+          return post;
+        }
+        throw new AuthenticationError("User is not logged in");
       } catch (err) {
         console.log(err);
       }
@@ -89,7 +95,7 @@ const resolvers = {
           _id:context.user._id
         },
         //delete the book based on the book ID from the db
-        { $pull: { savedServicePost: { _id: args._id } } },
+        { $pull: { ServicePost: { _id: args._id } } },
         { new: true }
         );
         return updateUser;
