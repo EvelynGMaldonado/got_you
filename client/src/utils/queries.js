@@ -2,29 +2,21 @@ import { gql } from '@apollo/client';
 
 export const QUERY_ME = gql`
   query me {
-    user {
+    User {
       _id
       first_name
       last_name
       username
       email
       password
-      # servicePost
+      servicePost {
+          _id
+        name
+        description
+        location
+        hourly_rate
+        phone_number
+        image
+      }
     }
-  }
-`;
-
-export const QUERY_FINDSERVICEPOST = gql`
-  query findServicePost($_id: String) {
-    matchups(location: $location) {
-      _id
-      name
-      description
-      location
-      hourly_rate
-      phone_number
-      # user
-      
-    }
-  }
-`;
+  }`;
