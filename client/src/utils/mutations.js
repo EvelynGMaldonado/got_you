@@ -15,10 +15,12 @@ export const ADD_USER = gql`
     addUser(first_name: $first_name, last_name: $last_name, username: $username, email: $email, password: $password) {
       token
       user {
-        _id: ID
+        _id
         first_name
         last_name
         username
+        email
+        password
       }
     }
   }`;

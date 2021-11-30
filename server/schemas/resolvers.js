@@ -6,6 +6,9 @@ const { signToken } = require("../utils/auth");
 //functions for queries in typeDef.js
 const resolvers = {
   Query: {
+    users: async () => {
+      return User.find();
+    },
     //when we add context to the query, then i can retrieve the logged in user without have to specififally look for it.
     me: async (parent, args, context) => {
       //if context has an 'user property' then it means that the user excecuting this query has a valid JWT and is already logged in
@@ -26,10 +29,10 @@ const resolvers = {
   },
   Mutation: {
     //creates a single user an a jwt token for that user
-    addUser: async (parent, {userData}) => {
+    addUser: async (parent, {first_name, last_name, username, email, password}) => {
       try {
         //create a new user first
-        const user = await User.create(userData);
+        const user = await User.create({first_name, last_name, username, email, password});
         //sign a JSON web token and log in the user after it is created
         const token = signToken(user);
         //we need to return an 'auth' object that contains the signed token and user's info

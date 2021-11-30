@@ -27,13 +27,14 @@ const typeDefs = gql`
   type Query {
     me: User
     findServicePost(location:String):[ServicePost]
+    users: [User]!
   }
 
 
 
   type Mutation {
     login(email: String!, password: String!): Auth
-    addUser(userData: UserInput!): Auth
+    addUser(first_name: String!, last_name: String!, username: String!, email: String!, password: String!): Auth
     addServicePost(servicePostData: ServicePostInput!): ServicePost
     savedServicePost(_id: ID!): User
     removeServicePost(_id: ID!): User

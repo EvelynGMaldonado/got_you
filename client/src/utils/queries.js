@@ -20,3 +20,21 @@ export const QUERY_ME = gql`
       }
     }
   }`;
+
+export const QUERY_ALL = gql`
+query all{
+  users{
+      _id
+      first_name
+      last_name
+      username
+      email
+      servicePost {
+      	name
+  			description
+  			location
+  			hourly_rate
+ 		 		phone_number
+      }
+    }
+}`;

@@ -1,6 +1,7 @@
 //decode a token and het the user'sinfo out of it
 import decode from "jwt-decode";
 
+
 //create a class to instantiate for a user
 class Auth {
     //get user data
@@ -34,13 +35,13 @@ class Auth {
     login(idToken) {
         //we need to save the user's token to localstorage
         localStorage.setItem("id_token", idToken);
-        window.location.assign("/");
+        window.location.assign("/profile");
     }
     logout() {
         //clear user's token and profile data from localstorage
         localStorage.removeItem("id_token");
         //we'll reload the page and reset the state of the app
-        window.location.reload();
+        window.location.assign("/");
     }
 }
 
