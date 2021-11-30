@@ -4,7 +4,7 @@ import decode from "jwt-decode";
 //create a class to instantiate for a user
 class Auth {
     //get user data
-    getprofile() {
+    getUser() {
         return decode(this.getToken());
     }
 
@@ -12,20 +12,21 @@ class Auth {
     loggedIn() {
         //check if there is a saved token and still valid
         const token = this.getToken();
-        return !!token && !this.isTokenExpired(token);
+        return token ? true : false;
+        // return !!token && !this.isTokenExpired(token);
         //handwaiving??
     }
     //check if token is expired
-    isTokenExpired(token) {
-        try {
-            const decoded = decode(token);
-            if (decoded.exp < Date.now() / 1000) {
-                return true;
-            } else return false;
-        } catch (err) {
-            return false;
-        }
-    }
+    // isTokenExpired(token) {
+    //     try {
+    //         const decoded = decode(token);
+    //         if (decoded.exp < Date.now() / 1000) {
+    //             return true;
+    //         } else return false;
+    //     } catch (err) {
+    //         return false;
+    //     }
+    // }
     getToken() {
         //get user token from local storage
         return localStorage.getItem("id_token");
@@ -39,7 +40,7 @@ class Auth {
         //clear user's token and profile data from localstorage
         localStorage.removeItem("id_token");
         //we'll reload the page and reset the state of the app
-        window.location.assign("/");
+        window.location.reload();
     }
 }
 

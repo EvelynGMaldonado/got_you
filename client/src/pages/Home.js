@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Auth from '../utils/auth';
-import { useMutation } from '@apollo/react-hooks';
+// import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import {LOGIN_USER} from '../utils/mutations';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
@@ -53,55 +54,70 @@ import "./Home.css";
 //   };
   
 // };
-const Home = () => {
-  const { loading, data } = useQuery(QUERY_ME, {
-    fetchPolicy: "no-cache"
-  });
+const Home = (props) => {
+  // const { loading, data } = useQuery(QUERY_ME, {
+  //   fetchPolicy: "no-cache"
+  // });
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  // const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [login] = useMutation(LOGIN_USER);
+  // const User = data?.User || [];
 
-  const User = data?.User || [];
-  const [userFormData, setUserFormData] = useState({
-    first_name: "",
-    last_name: "",
-    username: "",
-    email: "",
-    password: ""
-  });
-  const [validated] = useState(false);
+
+  // const [userFormData, setUserFormData] = useState({
+  //   first_name: "",
+  //   last_name: "",
+  //   username: "",
+  //   email: "",
+  //   password: ""
+  // });
+
+
+  // const [validated] = useState(false);
   // const [showAlert, setShowAlert] = useState(false);
-  const [loginUser] = useMutation(LOGIN_USER);
+  // const [loginUser] = useMutation(LOGIN_USER);
+
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUserFormData({
-      ...setUserFormData, [name]: value
+    setFormState({
+      ...formState, [name]: value
     });
   };
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const form = event.currentTarget; 
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.setPropahation();
-    }
+    console.log(formState);
+    // const form = event.currentTarget; 
+    // if (form.checkValidity() === false) {
+    //   event.preventDefault();
+    //   event.setPropahation();
+    // }
     try {
-      const { data } = await loginUser ({
-        variables: {
-          ...userFormData
-        },
+      const { data } = await login ({
+        variables: {...formState},
       });
       Auth.login(data.login.token);
     } catch(err) {
       console.log(err);
       // setShowAlert(true);
     }
-    setUserFormData({
-      first_name: "",
-      last_name: "",
-      username: "",
-      email: "",
-      password: ""
+    // setUserFormData({
+    //   first_name: "",
+    //   last_name: "",
+    //   username: "",
+    //   email: "",
+    //   password: ""
+    // });
+
+    // clear form values
+    setFormState({
+      email: '',
+      password: '',
     });
   };
+
+  // };
 
   //update state besed on input changes
   // const handleChange = (event) =>{
@@ -168,7 +184,7 @@ const Home = () => {
         <img src={require("../assets/tutoring.jpg").default} style={{maxWidth:"10%"}} alt="pp"/>
       </div >
       <section className="login">
-          <form className=" signin fit stack" style={{margin:"auto", maxWidth:"65%"}}>
+          <form onSubmit={handleFormSubmit} className=" signin fit stack" style={{margin:"auto", maxWidth:"65%"}}>
             <h4 className="log">Login</h4>
             <div className="empw full-width">
               <label>Email</label>
@@ -178,8 +194,8 @@ const Home = () => {
                 placeholder="email"
                 name ="email"
                 onChange = {handleInputChange}
-                value = {userFormData.email}
-                required 
+                value = {formState.email}
+                // required 
               />
               <label> Password</label>
               <input 
@@ -188,13 +204,13 @@ const Home = () => {
                 placeholder="pasword"
                 name= "password"
                 onChange = {handleInputChange}
-                value = {userFormData.password}
-                required
+                value = {formState.password}
+                // required
               />
             </div>
             <button 
               className="btnlog"
-              disabled = {!(userFormData.email && userFormData.password)}
+              disabled = {!(formState.email && formState.password)}
               type = "submit"
               onClick={handleFormSubmit}
               variant = "success">

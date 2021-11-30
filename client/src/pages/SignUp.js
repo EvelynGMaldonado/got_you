@@ -1,58 +1,48 @@
 import React, { useState } from "react";
 import Auth from "../utils/auth";
-import { useMutation } from "@apollo/react-hooks";
+
+import { useMutation } from '@apollo/client';
 import { ADD_USER } from "../utils/mutations";
 import "./SignUp.css";
 import { Link } from 'react-router-dom';
 
 const SignUp = () =>{
-    //set initial form state
-    const [userFormData, setUserFormData] = useState ({
-        first_name: "",
-        last_name: "",
-        username: "",
-        email: "",
-        password: ""
-    });
-    //set state for validation
-    const [validated] = useState(false);
-    //set state for alert
-    // const [showAlert, setShowAlert] = useState(false);
-    //mutation query to add a user
-    const [createUser] = useMutation(ADD_USER);
-    const handleInputChange = (event) => {
+    
+    const [formState, setFormState] = useState({
+        first_name: '',
+        last_name: '',
+        username: '',
+        email: '',
+        password: '',
+      });
+      const [addUser, { error, data }] = useMutation(ADD_USER);
+      // const [addUser] = useMutation(ADD_USER);
+    
+      // update state based on form input changes
+      const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setUserFormData({
-            ...userFormData, [name]: value
+    
+        setFormState({
+          ...formState,
+          [name]: value,
         });
-    };
-    const handleFormSubmit = async (event) => {
-        event.preventDefalut();
-        //check if form has everything
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefalut();
-            event.stopPropagation();
-        }
+      };
+    
+      // submit form
+      const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        console.log(formState);
+    
         try {
-            const { data } = await createUser ({
-                VARIABLES: {
-                    ...userFormData
-                },
-            });
-            Auth.login();
-        } catch (err) {
-            console.log(err);
-            // setShowAlert(true);
+          const { data } = await addUser({
+            variables: { ...formState },
+          });
+    
+          Auth.login(data.User.token);
+        } catch (e) {
+          console.error(e);
         }
-        setUserFormData({
-            first_name: "",
-            last_name: "",
-            username: "",
-            email: "",
-            password: ""
-        })
-    }
+      };
 
     return(
         <main className="base-grid home-columns">
@@ -79,8 +69,8 @@ const SignUp = () =>{
                             placeholder="name"
                             name="first_name"
                             onChange={handleInputChange}
-                            value={userFormData.first_name}
-                            required
+                            value={formState.first_name}
+                            // required
                         />
                         <label>Last Name</label>
                         <input 
@@ -88,8 +78,8 @@ const SignUp = () =>{
                             placeholder="last name"
                             name="last_name"
                             onChange={handleInputChange}
-                            value={userFormData.last_name}
-                            required
+                            value={formState.last_name}
+                            // required
                         />
                         <label>Username</label>
                         <input 
@@ -97,8 +87,8 @@ const SignUp = () =>{
                             placeholder="username"
                             name="username"
                             onChange={handleInputChange}
-                            value={userFormData.username}
-                            required
+                            value={formState.username}
+                            // required
                         />
                         <label>Email</label>
                         <input 
@@ -106,8 +96,8 @@ const SignUp = () =>{
                             placeholder="email"
                             name="email"
                             onChange={handleInputChange}
-                            value={userFormData.email}
-                            required
+                            value={formState.email}
+                            // required
                         />
                         <label> Password</label>
                         <input 
@@ -115,21 +105,21 @@ const SignUp = () =>{
                             placeholder="password"
                             name="password"
                             onChange={handleInputChange}
-                            value={userFormData.password}
-                            required
+                            value={formState.password}
+                            // required
                         />
-                        <label>Confirm Password</label>
+                        {/* <label>Confirm Password</label>
                         <input 
                         placeholder="confirm password"
                         name="confirm_password"
                         onChange={handleInputChange}
-                        value={userFormData.confirm_password}
+                        value={formState.confirm_password}
                         required
-                        />
+                        /> */}
                     </div>
                     <button 
                         className="btnlog"
-                        disabled = {!(userFormData.first_name && userFormData.last_name && userFormData.username && userFormData.email && userFormData.password && userFormData.confirm_password)}
+                        disabled = {!(formState.first_name && formState.last_name && formState.username && formState.email && formState.password)}
                         type = "submit"
                         onClick={handleFormSubmit}
                         variant = "success">
