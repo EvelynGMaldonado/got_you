@@ -59,8 +59,8 @@ const Home = (props) => {
   //   fetchPolicy: "no-cache"
   // });
   const [formState, setFormState] = useState({ email: '', password: '' });
-  // const [login, { error, data }] = useMutation(LOGIN_USER);
-  const [login] = useMutation(LOGIN_USER);
+  const [login, { error, data }] = useMutation(LOGIN_USER);
+  // const [login] = useMutation(LOGIN_USER);
   // const User = data?.User || [];
 
 
