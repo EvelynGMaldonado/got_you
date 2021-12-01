@@ -23,19 +23,78 @@ const EditProfile = () =>{
                     <h4 className="ed">Edit Profile</h4>
                     <div className="empw">
                         <label>Name</label>
-                        <input placeholder="name"/>
+                        <input 
+                            placeholder="name"
+                            type="text"
+                            placeholder="name"
+                            name="first_name"
+                            // onChange={handleInputChange}
+                            // value={formState.first_name}
+                            // required
+                        />
                         <label>Last Name</label>
-                        <input placeholder="last name"/>
+                        <input 
+                            type="text"
+                            placeholder="last name"
+                            name="last_name"
+                            // onChange={handleInputChange}
+                            // value={formState.last_name}
+                            // required
+                        />
+                        <label>Username</label>
+                        <input 
+                            type="text"
+                            placeholder="username"
+                            name="username"
+                            // onChange={handleInputChange}
+                            // value={formState.username}
+                            // required
+                        />
                         <label>Email</label>
-                        <input placeholder="email"/>
+                        <input 
+                            type="text"
+                            placeholder="email"
+                            name="email"
+                            // onChange={handleInputChange}
+                            // value={formState.email}
+                            // required
+                        />
                         <label>Change Password</label>
-                        <input placeholder="change pasword"/>
+                        <input 
+                            type="text"
+                            placeholder="change pasword"
+                            name="password"
+                            // onChange={handleInputChange}
+                            // value={formState.password}
+                            // required
+                        />
                         <label>Confirm Password</label>
-                        <input placeholder="confirm pasword"/>
+                        <input 
+                            placeholder="confirm password"
+                            name="confirm_password"
+                            // onChange={handleInputChange}
+                            // value={formState.confirm_password}
+                            // required
+                        />
                         <label>Biography</label>
-                        <input placeholder="about me"/>
+                        <input 
+                            placeholder="about me"
+                            type="text"
+                            name="aboutme"
+                            // onChange={handleInputChange}
+                            // value={formState.aboutme}
+                            // required
+                        />
                         <label>Update Profile Picture</label>
-                        <input className="profpic" placeholder="upload profile picture"/>
+                        <input 
+                            className="profpic" 
+                            placeholder="upload profile picture"
+                            type="text"
+                            name="profpic"
+                            // onChange={handleInputChange}
+                            // value={formState.profpic}
+                            // required
+                        />
                     </div>
                         <div className="full-width distribute-even fit">
                             <button className="add fit">Add photo</button>
