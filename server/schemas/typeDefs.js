@@ -17,6 +17,8 @@ const typeDefs = gql`
     location: String
     hourly_rate: String
     phone_number: String
+    image: String
+  
     user:User
   }
   type Auth {
@@ -28,6 +30,7 @@ const typeDefs = gql`
     me: User
     findServicePost(location:String):[ServicePost]
     users: [User]!
+    services (username: String): [ServicePost]
   }
 
 

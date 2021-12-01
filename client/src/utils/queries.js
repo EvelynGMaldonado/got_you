@@ -38,3 +38,18 @@ query all{
       }
     }
 }`;
+
+export const QUERY_SERVICES = gql`
+query getServices {
+  services {
+        _id
+        name
+        description
+        location
+        hourly_rate
+        phone_number
+        image
+
+  }
+  
+}`
