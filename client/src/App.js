@@ -18,6 +18,9 @@ import FindService from './pages/FindService';
 import NotFound from './pages/NotFound';
 import "./App.css";
 
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
 
 // const client = new ApolloClient({
 //   request: operation => {
@@ -69,6 +72,7 @@ function App() {
             <p style={{fontSize:"3rem"}}>IGotcha!</p>
           </h1>
         </header>
+         <Navbar/>
           <Switch>
             <Route exact path="/signup">
               <SignUp/>
@@ -95,9 +99,7 @@ function App() {
               <NotFound />
             </Route>
           </Switch>
-          <footer className="">
-            <p> {new Date().getFullYear()} - IGotcha!</p>
-          </footer>
+          <Footer/>
         </div>
       </Router>
     </ApolloProvider>
