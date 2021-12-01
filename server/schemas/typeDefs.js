@@ -18,8 +18,7 @@ const typeDefs = gql`
     hourly_rate: String
     phone_number: String
     image: String
-  
-    user:User
+    user: User
   }
   type Auth {
     token: ID!
@@ -38,7 +37,7 @@ const typeDefs = gql`
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(first_name: String!, last_name: String!, username: String!, email: String!, password: String!): Auth
-    addServicePost(servicePostData: ServicePostInput!): ServicePost
+    addServicePost(name: String!, description: String, location: String!, hourly_rate: String!, phone_number: String!, image: String!): ServicePost
     savedServicePost(_id: ID!): User
     removeServicePost(_id: ID!): User
   }

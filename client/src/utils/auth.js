@@ -32,10 +32,10 @@ class Auth {
         //get user token from local storage
         return localStorage.getItem("id_token");
     }
-    login(idToken) {
+    login(idToken, history) {
         //we need to save the user's token to localstorage
         localStorage.setItem("id_token", idToken);
-        window.location.assign("/profile");
+        history.push("/profile");
     }
     logout() {
         //clear user's token and profile data from localstorage

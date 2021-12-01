@@ -65,7 +65,7 @@ const OfferService = () =>{
                 location: formState.location,
                 hourly_rate: formState.hourly_rate,
                 phone_number: formState.phone_number,
-                image: formState.image,
+                image: 'image',
                 user: Auth.getUser()
             },
             }); 
