@@ -33,7 +33,9 @@ const UserProfile =() => {
                             </li>
                         </ul>
                     </div>
+                    <Link to="/edit-profile">
                     <button className="editprof-btn">Edit Profile</button>
+                    </Link>
                 </form>
             </section>
         </main>

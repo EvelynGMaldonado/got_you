@@ -217,7 +217,9 @@ const Home = (props) => {
               Login
             </button>
           </form>
-        <button className="btnsign full-width">Sign up</button>
+          <Link to="/signup">
+            <button className="btnsign full-width">Sign up</button>
+          </Link>
       </section>
       <section className="intro">
         <div className="">
