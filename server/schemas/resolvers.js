@@ -29,7 +29,7 @@ const resolvers = {
       return ServicePost.find(params).populate("User");
     },
     services: async (parent, { username }) => {
-      console.log("qury services")
+      console.log("query services")
     const params = username ? { username } : {};
     return ServicePost.find(params).populate("User");
   },
@@ -50,17 +50,28 @@ const resolvers = {
         console.log(err);
       }
     },
-    addServicePost: async (parent, servicePostData, context) => {
+    addServicePost: async (parent, {name, description, location, hourly_rate, phone_number, image}, context) => {
       console.log("adding service post")
+      
+        // return ServicePost.create({ name, description, location, hourly_rate, phone_number, image });
+  
       try {
         if (context.user) {
-          console.log("tetsing context.user")
+          console.log("tetsing context.user");
+          console.log(context.user);
           let post = await ServicePost.create({
-            ...servicePostData,
+            name,
+            description,
+            location,
+            hourly_rate,
+            phone_number,
+            image,
             user:context.user._id
           });
-          post = await post.populate("user").execPopulate();
-          return post;
+          let user = await User.findByIdAndUpdate(context.user._id, {$push:{servicePost:post._id}});
+          const finalpost = await post.populate("user").populate({ path:"user", populate:"servicePost" }).execPopulate();
+          console.log(finalpost);
+          return finalpost;
         }
         throw new AuthenticationError("User is not logged in");
       } catch (err) {
