@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ApolloClient,
   InMemoryCache,
@@ -59,6 +59,7 @@ const client = new ApolloClient({
   
 
 function App() {
+  const [user, setUser] = useState(null);
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -71,10 +72,10 @@ function App() {
         </header>
           <Switch>
             <Route exact path="/signup">
-              <SignUp/>
+              <SignUp setUser={setUser}/>
             </Route>
             <Route exact path="/profile">
-              <UserProfile/>
+              <UserProfile user={user}/>
             </Route>
             <Route exact path="/edit-profile">
               <EditProfile/>
@@ -89,7 +90,7 @@ function App() {
               <FindService/>
             </Route>
             <Route exact path="/">
-              <Home />
+              <Home setUser={setUser}/>
             </Route>
             <Route>
               <NotFound />

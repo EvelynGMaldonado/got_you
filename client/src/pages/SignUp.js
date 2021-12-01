@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Auth from "../utils/auth";
-
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from "../utils/mutations";
 import "./SignUp.css";
 import { Link } from 'react-router-dom';
 
-const SignUp = () =>{
+const SignUp = ({ setUser }) =>{
     
     const [formState, setFormState] = useState({
         first_name: '',
@@ -15,6 +15,7 @@ const SignUp = () =>{
         email: '',
         password: '',
       });
+      const history = useHistory();
       const [addUser, { error, data }] = useMutation(ADD_USER);
       // const [addUser] = useMutation(ADD_USER);
     
@@ -37,8 +38,9 @@ const SignUp = () =>{
         const { data } = await addUser({
         variables: { ...formState },
     });
-
-    Auth.login(data.token);
+    console.log(data);
+    Auth.login(data.token, history);
+    setUser(data.addUser.user)
     } catch (e) {
         console.error(e);
     }

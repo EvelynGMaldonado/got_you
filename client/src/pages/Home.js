@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useHistory } from 'react-router-dom';
 import Auth from '../utils/auth';
 // import { useMutation } from '@apollo/react-hooks';
 import { useMutation } from '@apollo/client';
@@ -54,12 +55,13 @@ import "./Home.css";
 //   };
   
 // };
-const Home = (props) => {
+const Home = ({ setUser }) => {
   // const { loading, data } = useQuery(QUERY_ME, {
   //   fetchPolicy: "no-cache"
   // });
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
+  const history = useHistory();
   // const [login] = useMutation(LOGIN_USER);
   // const User = data?.User || [];
 
@@ -97,7 +99,9 @@ const Home = (props) => {
       const { data } = await login ({
         variables: {...formState},
       });
-      Auth.login(data.login.token);
+      console.log(data);
+      Auth.login(data.login.token, history);
+      setUser(data.login.user);
     } catch(err) {
       console.log(err);
       // setShowAlert(true);
