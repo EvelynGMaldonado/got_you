@@ -6,6 +6,10 @@ export const LOGIN_USER = gql`
       token
       user {
         _id
+        first_name
+        last_name
+        username
+        email
       }
     }
   }`;
@@ -26,15 +30,13 @@ export const ADD_USER = gql`
   }`;
 
 export const ADD_SERVICEPOST = gql`
-mutation addServicePost($name: String, $description: String, $location:String, $hourly_rate: String, $phone_number: String, $image: String, $user: String) {
-  addServicePost(name: $name, description: $description, location: $location, hourly_rate: $hourly_rate, phone_number: $phone_number, image: $image, user: $user) {
+mutation addServicePost($name: String!, $description: String!, $location: String!, $hourly_rate: String!, $phone_number: String!, $image: String!) {
+  addServicePost(name: $name, description: $description, location: $location, hourly_rate: $hourly_rate, phone_number: $phone_number, image: $image) {
     user {
-      _id: ID
       first_name
       last_name
       username
       servicePost {
-        _id
         name
         description
         location

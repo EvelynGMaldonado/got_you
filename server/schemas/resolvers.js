@@ -11,6 +11,7 @@ const resolvers = {
     },
     //when we add context to the query, then i can retrieve the logged in user without have to specififally look for it.
     me: async (parent, args, context) => {
+      console.log("me query")
       //if context has an 'user property' then it means that the user excecuting this query has a valid JWT and is already logged in
       if(context.user) {
         const userData = await User.findOne({
@@ -22,11 +23,13 @@ const resolvers = {
       throw new AuthenticationError("User is not logged in")
     },
     findServicePost: async (parent, { location }) => {
+      console.log("findservice post")
       //if context has an 'user property' then it means that the user excecuting this query has a valid JWT and is already logged i
       const params = location ? { location } : {};
       return ServicePost.find(params).populate("User");
     },
     services: async (parent, { username }) => {
+      console.log("qury services")
     const params = username ? { username } : {};
     return ServicePost.find(params).populate("User");
   },
@@ -35,6 +38,7 @@ const resolvers = {
   Mutation: {
     //creates a single user an a jwt token for that user
     addUser: async (parent, {first_name, last_name, username, email, password}) => {
+      console.log("mutation add user")
       try {
         //create a new user first
         const user = await User.create({first_name, last_name, username, email, password});
@@ -46,9 +50,11 @@ const resolvers = {
         console.log(err);
       }
     },
-    addServicePost: async (parent, {servicePostData}, context) => {
+    addServicePost: async (parent, servicePostData, context) => {
+      console.log("adding service post")
       try {
         if (context.user) {
+          console.log("tetsing context.user")
           let post = await ServicePost.create({
             ...servicePostData,
             user:context.user._id
@@ -63,6 +69,7 @@ const resolvers = {
     },
     //login mutation to find a specific user by email in the db
     login: async (parent, { email, password }) => {
+      console.log("login")
       //look for the user by the email which has to be unique
       const user = await User.findOne({ email });
       //if there is no user with that email address then i need to return a authentication error
@@ -80,6 +87,7 @@ const resolvers = {
       return { token, user };
     },
     savedServicePost: async (parent, args, context) => {
+      console.log("saved service post mutation")
       //if context has an 'user property' then it means that the user excecuting this query has a valid JWT and is already logged in
       if(context.user) {
         const updateUser = await User.findOneAndUpdate({
@@ -97,6 +105,7 @@ const resolvers = {
     },
     //when we add context to the query, then i can retrieve the logged in user without have to specififally look for it.
     removeServicePost: async (parent, args, context) => {
+      console.log("remove service mutation")
       //if context has an 'user property' then it means that the user excecuting this query has a valid JWT and is already logged in
       if(context.user) {
         const updateUser = await User.findOneAndUpdate({
