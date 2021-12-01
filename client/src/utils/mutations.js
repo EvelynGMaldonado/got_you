@@ -40,6 +40,7 @@ mutation addServicePost($name: String, $description: String, $location:String, $
         location
         hourly_rate
         phone_number
+        image
       }
     }
   }
@@ -59,6 +60,7 @@ mutation savedServicePost($servicePostId: ID!) {
         location
         hourly_rate
         phone_number
+        image
       }
     
   }

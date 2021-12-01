@@ -23,26 +23,26 @@ const SignUp = () =>{
         const { name, value } = event.target;
     
         setFormState({
-          ...formState,
-          [name]: value,
-        });
-      };
-    
-      // submit form
-      const handleFormSubmit = async (event) => {
-        event.preventDefault();
-        console.log(formState);
-    
-        try {
-          const { data } = await addUser({
-          variables: { ...formState },
-        });
-  
-        Auth.login(data.token);
-        } catch (e) {
-          console.error(e);
-        }
-      };
+        ...formState,
+        [name]: value,
+    });
+    };
+
+    // submit form
+    const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
+
+    try {
+        const { data } = await addUser({
+        variables: { ...formState },
+    });
+
+    Auth.login(data.token);
+    } catch (e) {
+        console.error(e);
+    }
+    };
 
     return(
         <main className="base-grid home-columns">

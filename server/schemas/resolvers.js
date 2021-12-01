@@ -25,8 +25,13 @@ const resolvers = {
       //if context has an 'user property' then it means that the user excecuting this query has a valid JWT and is already logged i
       const params = location ? { location } : {};
       return ServicePost.find(params).populate("User");
-    }
+    },
+    services: async (parent, { username }) => {
+    const params = username ? { username } : {};
+    return ServicePost.find(params).populate("User");
   },
+  },
+    
   Mutation: {
     //creates a single user an a jwt token for that user
     addUser: async (parent, {first_name, last_name, username, email, password}) => {
