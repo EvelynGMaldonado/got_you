@@ -2,7 +2,8 @@ import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 import { QUERY_ME } from '../utils/queries';
-import "./UserProfile.css";
+import "./css/UserProfile.css";
+
 
 const UserProfile =() => {
     const { loading, data } = useQuery(QUERY_ME, {
@@ -12,19 +13,6 @@ const UserProfile =() => {
     const user= loading?null:data.me
     return(
         <main className="base-grid home-columns">
-            <nav className="full-width nav-columns distribute-even fit">
-                <Link to="/profile">
-                <button className="btn">Profile</button>
-                </Link>
-                <Link to="/find-service">
-                <button className="btn">Find Service</button>
-                </Link>
-                <Link to="/offer-service">
-                <button className="btn">Offer Service</button>
-                </Link>
-                <button className="btn">Language</button>
-                <button onClick={Auth.logout}className="btn">Logout</button>
-            </nav>
             <section className="edit full-width">
                 <form className="editprof fit stack" style={{margin:"auto", maxWidth:"70%"}}>
                     <h4 className="ed">Edit Profile</h4>
