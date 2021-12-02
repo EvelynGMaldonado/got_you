@@ -1,14 +1,16 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_ME = gql`
-  query me {
-    User {
+  {
+    me {
       _id
       first_name
       last_name
       username
       email
       password
+      profpic
+      aboutme
       servicePost {
           _id
         name
@@ -17,27 +19,32 @@ export const QUERY_ME = gql`
         hourly_rate
         phone_number
         image
-      }
-    }
-  }`;
+      } 
+    } 
+}
+  `;
 
 export const QUERY_ALL = gql`
-query all{
-  users{
-      _id
-      first_name
-      last_name
-      username
-      email
-      servicePost {
-      	name
-  			description
-  			location
-  			hourly_rate
- 		 		phone_number
+ 
+ {
+   all{
+    users{
+        _id
+        first_name
+        last_name
+        username
+        email
+        servicePost {
+          name
+          description
+          location
+          hourly_rate
+          phone_number
+        }
       }
     }
-}`;
+ }
+`;
 
 export const QUERY_SERVICES = gql`
 query getServices {

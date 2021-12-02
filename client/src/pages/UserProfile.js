@@ -1,8 +1,15 @@
+import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
+import { QUERY_ME } from '../utils/queries';
 import "./UserProfile.css";
 
-const UserProfile =({ user }) => {
+const UserProfile =() => {
+    const { loading, data } = useQuery(QUERY_ME, {
+    fetchPolicy: "no-cache"
+    });
+    console.log("line 11", data);
+    const user= loading?null:data.me
     return(
         <main className="base-grid home-columns">
             <nav className="full-width nav-columns distribute-even fit">
@@ -23,10 +30,10 @@ const UserProfile =({ user }) => {
                     <h4 className="ed">Edit Profile</h4>
                     <div className="empw">
                         <img/>
-                        <h6>Full Name: {user?.first_name + user?.last_name} </h6>
+                        <h6>Full Name: {`${user?.first_name} ${user?.last_name}`} </h6>
                         <p>Email: {user?.email}</p>
-                        <p>Biography:</p>
-                        <p>My Services:</p>
+                        <p>Biography: {user?.aboutme}</p> 
+                        <p>My Services:{user?.servicePost[0].name}</p>
                         <ul>
                             <li>
                                 
