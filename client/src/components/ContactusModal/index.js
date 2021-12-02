@@ -59,7 +59,7 @@ const CloseModalButton = styled(MdClose)`
 `;
 
 
-const Modal = ({ showModal, setShowModal }) =>{
+const ContactusModal = ({ showContactusModal, setShowContactusModal }) =>{
 
     const modalRef = useRef();
 
@@ -67,24 +67,24 @@ const Modal = ({ showModal, setShowModal }) =>{
       config: {
         duration: 250
       },
-      opacity: showModal ? 1 : 0,
-      transform: showModal ? `translateY(0%)` : `translateY(-100%)`
+      opacity: showContactusModal ? 1 : 0,
+      transform: showContactusModal ? `translateY(0%)` : `translateY(-100%)`
     });
   
-    const closeModal = e => {
+    const closeContactusModal = e => {
       if (modalRef.current === e.target) {
-        setShowModal(false);
+        setShowContactusModal(false);
       }
     };
 
     const keyPress = useCallback(
         e => {
-          if (e.key === 'Escape' && showModal) {
-            setShowModal(false);
+          if (e.key === 'Escape' && showContactusModal) {
+            setShowContactusModal(false);
             console.log('I pressed');
           }
         },
-        [setShowModal, showModal]
+        [setShowContactusModal, showContactusModal]
       );
     
       useEffect(
@@ -98,18 +98,18 @@ const Modal = ({ showModal, setShowModal }) =>{
 
     return (
         <>
-        {showModal ? (
-            <Background id="modal-background" onClick={closeModal} ref={modalRef}>
+        {showContactusModal ? (
+            <Background id="modal-background" onClick={closeContactusModal} ref={modalRef}>
                 <animated.div style={animation}>
                 <ModalWrapper id="modal-wrapper">
                     <ModalContent id="modal-content">
-                        <h1>About the devs</h1>
+                        <h1>Our contact info:</h1>
                             <h3>Evelyn Madonado</h3>
                             <p>Some text</p>
                             <h3>Jorge Barrag&aacute;n</h3>
                             <p>Some text</p>
                     </ModalContent>
-                    <CloseModalButton id="close-modal-btn" aria-label='Close modal' onClick={() => setShowModal(prev => !prev)} />
+                    <CloseModalButton id="close-modal-btn" aria-label='Close modal' onClick={() => setShowContactusModal(prev => !prev)} />
                 </ModalWrapper>
                 </animated.div>
             </Background>
@@ -119,4 +119,4 @@ const Modal = ({ showModal, setShowModal }) =>{
     )
 }
 
-export default Modal;
+export default ContactusModal;
