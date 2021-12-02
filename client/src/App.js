@@ -82,7 +82,7 @@ function App() {
               <UserProfile user={user}/>
             </Route>
             <Route exact path="/edit-profile">
-              <EditProfile/>
+              <EditProfile setUser={setUser}/>
             </Route>
             <Route exact path="/service-post">
               <ServicePost/>

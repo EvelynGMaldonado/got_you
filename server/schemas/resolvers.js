@@ -1,7 +1,7 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { User, ServicePost } = require('../models');
 const { signToken } = require("../utils/auth");
-
+// const { find, filter } = require ('lodash');
 
 //functions for queries in typeDef.js
 const resolvers = {
@@ -32,7 +32,10 @@ const resolvers = {
       console.log("query services")
     const params = username ? { username } : {};
     return ServicePost.find(params).populate("User");
-  },
+    }
+    // findUser: async (parent, args) => {
+    //   return await User.findById(args.id);
+    // },
   },
     
   Mutation: {
@@ -49,6 +52,29 @@ const resolvers = {
       } catch (err) {
         console.log(err);
       }
+    },
+    updateUser: async (parent, {first_name, last_name, aboutme, profpic}, context) => {
+      // Find and update the matching class using the destructured args
+      console.log("update user in resolvers");
+      //if context has an 'user property' then it means that the user excecuting this query has a valid JWT and is already logged in
+      if(context.user) {
+        console.log("updating the user");        
+        let userInfo = await User.findOneAndUpdate(
+          { _id: context.user._id},
+          {
+            first_name,
+            last_name,
+            profpic,
+            aboutme, 
+          },
+          { 
+            new: true,
+            runValidators: true, 
+          }).select("-__v -password").populate("ServicePost"); 
+        return userInfo;
+      }
+      console.log("my user info");
+      throw new AuthenticationError("User is not logged in");
     },
     addServicePost: async (parent, {name, description, location, hourly_rate, phone_number, image}, context) => {
       console.log("adding service post")

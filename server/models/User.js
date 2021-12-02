@@ -33,6 +33,12 @@ const userSchema = new Schema({
     required: true,
     match: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
   }, 
+  profpic: {
+    type: String,
+  },
+  aboutme: {
+    type: String,
+  },
   servicePost: [{
     type: Schema.Types.ObjectId,
     ref: "ServicePost"

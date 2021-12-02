@@ -10,6 +10,17 @@ export const LOGIN_USER = gql`
         last_name
         username
         email
+        profpic
+        aboutme
+        servicePost {
+            _id
+          name
+          description
+          location
+          hourly_rate
+          phone_number
+          image
+        }
       }
     }
   }`;
@@ -25,6 +36,31 @@ export const ADD_USER = gql`
         username
         email
         password
+        profpic
+        aboutme
+      }
+    }
+  }`;
+
+export const UPDATE_USER = gql`
+  mutation updateUser($first_name: String, $last_name: String, $aboutme: String, $profpic: String) {
+    updateUser(first_name: $first_name, last_name: $last_name, aboutme: $aboutme, profpic: $profpic) {
+      _id
+      first_name
+      last_name
+      username
+      email
+      password
+      profpic
+      aboutme
+      servicePost {
+          _id
+        name
+        description
+        location
+        hourly_rate
+        phone_number
+        image
       }
     }
   }`;
